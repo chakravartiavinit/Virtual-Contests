@@ -122,11 +122,20 @@ int main()
     cin >> n;
     long long capacity;
     cin >> capacity;
-    vector<long long> stops(n);
-    for (int i = 0; i < n; ++i)
+    long long max_sum = INT_MIN, min_sum = INT_MAX, sum = 0;
+    for (int i = 0; i < n; i++)
     {
-        cin >> stops[i];
+        int per;
+        cin >> per;
+        sum += per;
+        max_sum = max(max_sum, sum);
+        min_sum = min(sum, min_sum);
     }
-    
-
+    long long max_per, min_per;
+    min_per = max(0LL, -min_sum);
+    max_per = min(capacity, capacity - max_sum);
+    if (min_per > max_per)
+        cout << 0 << "\n";
+    else
+        cout << max_per - min_per + 1 << "\n";
 }
